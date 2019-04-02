@@ -86,6 +86,7 @@ Create empty FRR configuration files
     doas touch /etc/frr/ospfd.conf
     doas touch /etc/frr/ospf6d.conf
     doas touch /etc/frr/isisd.conf
+    doas touch /etc/frr/riftd.conf
     doas touch /etc/frr/ripd.conf
     doas touch /etc/frr/ripngd.conf
     doas touch /etc/frr/pimd.conf

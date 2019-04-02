@@ -89,4 +89,5 @@ enum Protocol {
   ISIS = 8;
   BGP = 9;
   OTHER = 10;
+  RIFT = 11;
 }

@@ -127,6 +127,7 @@ struct vtysh_client vtysh_client[] = {
 	{.fd = -1, .name = "ldpd", .flag = VTYSH_LDPD, .next = NULL},
 	{.fd = -1, .name = "bgpd", .flag = VTYSH_BGPD, .next = NULL},
 	{.fd = -1, .name = "isisd", .flag = VTYSH_ISISD, .next = NULL},
+	{.fd = -1, .name = "riftd", .flag = VTYSH_RIFTD, .next = NULL},
 	{.fd = -1, .name = "pimd", .flag = VTYSH_PIMD, .next = NULL},
 	{.fd = -1, .name = "nhrpd", .flag = VTYSH_NHRPD, .next = NULL},
 	{.fd = -1, .name = "eigrpd", .flag = VTYSH_EIGRPD, .next = NULL},
@@ -1142,6 +1143,10 @@ static struct cmd_node isis_node = {
 	ISIS_NODE, "%s(config-router)# ",
 };
 
+static struct cmd_node rift_node = {
+	RIFT_NODE, "%s(config-router)# ",
+};
+
 static struct cmd_node openfabric_node = {
 	OPENFABRIC_NODE, "%s(config-router)# ",
 };
@@ -1655,6 +1660,15 @@ DEFUNSH(VTYSH_ISISD, router_isis, router_isis_cmd, "router isis WORD",
 	return CMD_SUCCESS;
 }
 
+DEFUNSH(VTYSH_RIFTD, router_rift, router_rift_cmd, "router rift WORD",
+	ROUTER_STR
+	"RIFT\n"             /* RIFT-TODO */
+	"RIFT area tag\n")   /* RIFT-TODO */
+{
+	vty->node = RIFT_NODE;
+	return CMD_SUCCESS;
+}
+
 DEFUNSH(VTYSH_FABRICD, router_openfabric, router_openfabric_cmd, "router openfabric WORD",
 	ROUTER_STR
 	"OpenFabric routing protocol\n"
@@ -1778,6 +1792,7 @@ static int vtysh_exit(struct vty *vty)
 	case LDP_NODE:
 	case LDP_L2VPN_NODE:
 	case ISIS_NODE:
+	case RIFT_NODE:
 	case OPENFABRIC_NODE:
 	case RMAP_NODE:
 	case PBRMAP_NODE:
@@ -2041,6 +2056,18 @@ DEFUNSH(VTYSH_ISISD, vtysh_quit_isisd, vtysh_quit_isisd_cmd, "quit",
 	return vtysh_exit_isisd(self, vty, argc, argv);
 }
 
+DEFUNSH(VTYSH_RIFTD, vtysh_exit_riftd, vtysh_exit_riftd_cmd, "exit",
+	"Exit current mode and down to previous mode\n")
+{
+	return vtysh_exit(vty);
+}
+
+DEFUNSH(VTYSH_RIFTD, vtysh_quit_riftd, vtysh_quit_riftd_cmd, "quit",
+	"Exit current mode and down to previous mode\n")
+{
+	return vtysh_exit_riftd(self, vty, argc, argv);
+}
+
 #if HAVE_BFDD > 0
 DEFUNSH(VTYSH_BFDD, vtysh_exit_bfdd, vtysh_exit_bfdd_cmd, "exit",
 	"Exit current mode and down to previous mode\n")
@@ -2268,7 +2295,7 @@ DEFUN (vtysh_show_work_queues,
 
 DEFUN (vtysh_show_work_queues_daemon,
        vtysh_show_work_queues_daemon_cmd,
-       "show work-queues <zebra|ripd|ripngd|ospfd|ospf6d|bgpd|isisd|pbrd|fabricd|pimd|staticd>",
+       "show work-queues <zebra|ripd|ripngd|ospfd|ospf6d|bgpd|isisd|riftd|pbrd|fabricd|pimd|staticd>",
        SHOW_STR
        "Work Queue information\n"
        "For the zebra daemon\n"
@@ -2278,6 +2305,7 @@ DEFUN (vtysh_show_work_queues_daemon,
        "For the ospfv6 daemon\n"
        "For the bgp daemon\n"
        "For the isis daemon\n"
+       "For the rift daemon\n"
        "For the pbr daemon\n"
        "For the fabricd daemon\n"
        "For the pim daemon\n"
@@ -2619,7 +2647,7 @@ DEFUNSH(VTYSH_ALL, no_vtysh_config_enable_password,
 
 DEFUN (vtysh_write_terminal,
        vtysh_write_terminal_cmd,
-       "write terminal [<zebra|ripd|ripngd|ospfd|ospf6d|ldpd|bgpd|isisd|fabricd|pimd|staticd>]",
+       "write terminal [<zebra|ripd|ripngd|ospfd|ospf6d|ldpd|bgpd|isisd|riftd|fabricd|pimd|staticd>]",
        "Write running configuration to memory, network, or terminal\n"
        "Write to terminal\n"
        "For the zebra daemon\n"
@@ -2630,6 +2658,7 @@ DEFUN (vtysh_write_terminal,
        "For the ldpd daemon\n"
        "For the bgp daemon\n"
        "For the isis daemon\n"
+       "For the rift daemon\n"
        "For the fabricd daemon\n"
        "For the pim daemon\n"
        "For the static daemon\n")
@@ -2658,7 +2687,7 @@ DEFUN (vtysh_write_terminal,
 
 DEFUN (vtysh_show_running_config,
        vtysh_show_running_config_cmd,
-       "show running-config [<zebra|ripd|ripngd|ospfd|ospf6d|ldpd|bgpd|isisd|fabricd|pimd|staticd>]",
+       "show running-config [<zebra|ripd|ripngd|ospfd|ospf6d|ldpd|bgpd|isisd|riftd|fabricd|pimd|staticd>]",
        SHOW_STR
        "Current operating configuration\n"
        "For the zebra daemon\n"
@@ -2669,6 +2698,7 @@ DEFUN (vtysh_show_running_config,
        "For the ldp daemon\n"
        "For the bgp daemon\n"
        "For the isis daemon\n"
+       "For the rift daemon\n"
        "For the fabricd daemon\n"
        "For the pim daemon\n"
        "For the static daemon\n")
@@ -3530,6 +3560,7 @@ void vtysh_init_vty(void)
 	install_node(&keychain_node, NULL);
 	install_node(&keychain_key_node, NULL);
 	install_node(&isis_node, NULL);
+	install_node(&rift_node, NULL);
 	install_node(&openfabric_node, NULL);
 	install_node(&vty_node, NULL);
 	install_node(&rpki_node, NULL);
@@ -3623,6 +3654,8 @@ void vtysh_init_vty(void)
 #endif
 	install_element(ISIS_NODE, &vtysh_exit_isisd_cmd);
 	install_element(ISIS_NODE, &vtysh_quit_isisd_cmd);
+	install_element(RIFT_NODE, &vtysh_exit_riftd_cmd);
+	install_element(RIFT_NODE, &vtysh_quit_riftd_cmd);
 	install_element(OPENFABRIC_NODE, &vtysh_exit_fabricd_cmd);
 	install_element(OPENFABRIC_NODE, &vtysh_quit_fabricd_cmd);
 	install_element(KEYCHAIN_NODE, &vtysh_exit_ripd_cmd);
@@ -3685,6 +3718,7 @@ void vtysh_init_vty(void)
 	install_element(BGP_VNC_NVE_GROUP_NODE, &vtysh_end_all_cmd);
 	install_element(BGP_VNC_L2_GROUP_NODE, &vtysh_end_all_cmd);
 	install_element(ISIS_NODE, &vtysh_end_all_cmd);
+	install_element(RIFT_NODE, &vtysh_end_all_cmd);
 	install_element(OPENFABRIC_NODE, &vtysh_end_all_cmd);
 	install_element(KEYCHAIN_NODE, &vtysh_end_all_cmd);
 	install_element(KEYCHAIN_KEY_NODE, &vtysh_end_all_cmd);
@@ -3735,6 +3769,7 @@ void vtysh_init_vty(void)
 	install_element(LDP_L2VPN_NODE, &ldp_member_pseudowire_ifname_cmd);
 #endif
 	install_element(CONFIG_NODE, &router_isis_cmd);
+	install_element(CONFIG_NODE, &router_rift_cmd);
 	install_element(CONFIG_NODE, &router_openfabric_cmd);
 	install_element(CONFIG_NODE, &router_bgp_cmd);
 #ifdef KEEP_OLD_VPN_COMMANDS

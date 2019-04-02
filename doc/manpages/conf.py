@@ -318,6 +318,7 @@ man_pages = [
     ('ospf6d', 'ospf6d', fwfrr.format("an OSPFv3 "), [], 8),
     ('ospfd', 'ospfd', fwfrr.format("an OSPFv2 "), [], 8),
     ('isisd', 'isisd', fwfrr.format("an IS-IS "), [], 8),
+    ('riftd', 'riftd', fwfrr.format("a RIFT "), [], 8),
     ('ospfclient', 'ospfclient', 'an example ospf-api client', [], 8),
     ('ldpd', 'ldpd', fwfrr.format("an LDP "), [], 8),
     ('nhrpd', 'nhrpd', fwfrr.format("a Next Hop Routing Protocol "), [], 8),

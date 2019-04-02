@@ -11,6 +11,7 @@
    eigrpd
    isisd
    fabricd
+   riftd
    ldpd
    nhrpd
    ospf6d

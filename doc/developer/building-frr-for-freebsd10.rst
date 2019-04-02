@@ -98,6 +98,7 @@ For individual config files:
    sudo touch /usr/local/etc/frr/bgpd.conf
    sudo touch /usr/local/etc/frr/eigrpd.conf
    sudo touch /usr/local/etc/frr/isisd.conf
+   sudo touch /usr/local/etc/frr/riftd.conf
    sudo touch /usr/local/etc/frr/ldpd.conf
    sudo touch /usr/local/etc/frr/nhrpd.conf
    sudo touch /usr/local/etc/frr/ospf6d.conf

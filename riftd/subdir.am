@@ -1,0 +1,109 @@
+#
+# riftd
+#
+
+if RIFTD
+noinst_LIBRARIES += riftd/librift.a
+sbin_PROGRAMS += riftd/riftd
+dist_examples_DATA += riftd/riftd.conf.sample
+vtysh_scan += \
+	$(top_srcdir)/riftd/rift_cli.c \
+	$(top_srcdir)/riftd/rift_redist.c \
+	$(top_srcdir)/riftd/rift_spf.c \
+	$(top_srcdir)/riftd/rift_te.c \
+	$(top_srcdir)/riftd/rift_vty_common.c \
+	$(top_srcdir)/riftd/riftd.c \
+	# end
+man8 += $(MANBUILD)/riftd.8
+endif
+
+noinst_HEADERS += \
+	riftd/dict.h \
+	riftd/rift_adjacency.h \
+	riftd/rift_bfd.h \
+	riftd/rift_circuit.h \
+	riftd/rift_common.h \
+	riftd/rift_constants.h \
+	riftd/rift_csm.h \
+	riftd/rift_dr.h \
+	riftd/rift_dynhn.h \
+	riftd/rift_errors.h \
+	riftd/rift_events.h \
+	riftd/rift_flags.h \
+	riftd/rift_lsp.h \
+	riftd/rift_memory.h \
+	riftd/rift_misc.h \
+	riftd/rift_mt.h \
+	riftd/rift_network.h \
+	riftd/rift_pdu.h \
+	riftd/rift_pdu_counter.h \
+	riftd/rift_redist.h \
+	riftd/rift_route.h \
+	riftd/rift_routemap.h \
+	riftd/rift_spf.h \
+	riftd/rift_spf_private.h \
+	riftd/rift_te.h \
+	riftd/rift_tlvs.h \
+	riftd/rift_tx_queue.h \
+	riftd/rift_vty_common.h \
+	riftd/rift_zebra.h \
+	riftd/riftd.h \
+	riftd/iso_checksum.h \
+	riftd/rift_cli.h \
+	# end
+
+LIBRIFT_SOURCES = \
+	riftd/dict.c \
+	riftd/rift_adjacency.c \
+	riftd/rift_bfd.c \
+	riftd/rift_circuit.c \
+	riftd/rift_csm.c \
+	riftd/rift_dr.c \
+	riftd/rift_dynhn.c \
+	riftd/rift_errors.c \
+	riftd/rift_events.c \
+	riftd/rift_flags.c \
+	riftd/rift_lsp.c \
+	riftd/rift_memory.c \
+	riftd/rift_misc.c \
+	riftd/rift_mt.c \
+	riftd/rift_pdu.c \
+	riftd/rift_pdu_counter.c \
+	riftd/rift_redist.c \
+	riftd/rift_route.c \
+	riftd/rift_routemap.c \
+	riftd/rift_spf.c \
+	riftd/rift_te.c \
+	riftd/rift_tlvs.c \
+	riftd/rift_tx_queue.c \
+	riftd/rift_vty_common.c \
+	riftd/rift_zebra.c \
+	riftd/riftd.c \
+	riftd/iso_checksum.c \
+	# end
+
+RIFT_SOURCES = \
+	riftd/rift_bpf.c \
+	riftd/rift_dlpi.c \
+	riftd/rift_main.c \
+	riftd/rift_pfpacket.c \
+	# end
+
+RIFT_LDADD_COMMON = lib/libfrr.la $(LIBCAP)
+
+# Building riftd
+
+riftd_librift_a_SOURCES = \
+	$(LIBRIFT_SOURCES) \
+	riftd/rift_northbound.c \
+	riftd/rift_cli.c \
+	#end
+
+riftd/rift_cli_clippy.c: $(CLIPPY_DEPS)
+riftd/rift_cli.$(OBJEXT): riftd/rift_cli_clippy.c
+
+riftd_riftd_LDADD = riftd/librift.a $(RIFT_LDADD_COMMON)
+riftd_riftd_SOURCES = $(RIFT_SOURCES)
+nodist_riftd_riftd_SOURCES = \
+	yang/frr-riftd.yang.c \
+	# end

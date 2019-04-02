@@ -147,6 +147,7 @@ enum node_type {
 	BFD_NODE,		 /* BFD protocol mode. */
 	BFD_PEER_NODE,		 /* BFD peer configuration mode. */
 	OPENFABRIC_NODE,	/* OpenFabric router configuration node */
+	RIFT_NODE,		 /* RIFT protocol mode */
 	NODE_TYPE_MAX, /* maximum */
 };
 

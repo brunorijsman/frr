@@ -17,6 +17,7 @@ user_RSTFILES = \
 	doc/user/installation.rst \
 	doc/user/ipv6.rst \
 	doc/user/isisd.rst \
+	doc/user/riftd.rst \
 	doc/user/kernel.rst \
 	doc/user/nhrpd.rst \
 	doc/user/ospf6d.rst \

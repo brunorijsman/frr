@@ -99,6 +99,7 @@ Create empty FRR configuration files
     sudo touch /usr/pkg/etc/frr/ospfd.conf
     sudo touch /usr/pkg/etc/frr/ospf6d.conf
     sudo touch /usr/pkg/etc/frr/isisd.conf
+    sudo touch /usr/pkg/etc/frr/riftd.conf
     sudo touch /usr/pkg/etc/frr/ripd.conf
     sudo touch /usr/pkg/etc/frr/ripngd.conf
     sudo touch /usr/pkg/etc/frr/pimd.conf

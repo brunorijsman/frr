@@ -85,6 +85,7 @@ Create empty FRR configuration files
     sudo install -m 640 -o frr -g frr /dev/null /etc/frr/ospfd.conf
     sudo install -m 640 -o frr -g frr /dev/null /etc/frr/ospf6d.conf
     sudo install -m 640 -o frr -g frr /dev/null /etc/frr/isisd.conf
+    sudo install -m 640 -o frr -g frr /dev/null /etc/frr/riftd.conf
     sudo install -m 640 -o frr -g frr /dev/null /etc/frr/ripd.conf
     sudo install -m 640 -o frr -g frr /dev/null /etc/frr/ripngd.conf
     sudo install -m 640 -o frr -g frr /dev/null /etc/frr/pimd.conf

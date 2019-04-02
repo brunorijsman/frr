@@ -135,6 +135,7 @@ include ospfd/subdir.am
 include ospf6d/subdir.am
 include ospfclient/subdir.am
 include isisd/subdir.am
+include riftd/subdir.am
 include nhrpd/subdir.am
 include ldpd/subdir.am
 include babeld/subdir.am
@@ -199,6 +200,7 @@ EXTRA_DIST += \
 	eigrpd/Makefile \
 	fpm/Makefile \
 	isisd/Makefile \
+	riftd/Makefile \
 	ldpd/Makefile \
 	lib/Makefile \
 	nhrpd/Makefile \
@@ -231,7 +233,7 @@ redistclean:
 	$(MAKE) distclean CONFIG_CLEAN_FILES="$(filter-out $(EXTRA_DIST), $(CONFIG_CLEAN_FILES))"
 
 indent:
-	tools/indent.py `find sharpd bgpd eigrpd include isisd lib nhrpd ospf6d ospfd pimd qpb ripd vtysh zebra -name '*.[ch]' | grep -v include/linux`
+	tools/indent.py `find sharpd bgpd eigrpd include isisd riftd lib nhrpd ospf6d ospfd pimd qpb ripd vtysh zebra -name '*.[ch]' | grep -v include/linux`
 
 if HAVE_GCOV
 

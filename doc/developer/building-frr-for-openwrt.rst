@@ -64,7 +64,7 @@ Usage
 
 Edit ``/usr/sbin/frr.init`` and add/remove the daemons name in section
 ``DAEMONS=`` or don't install unneeded packages For example: zebra bgpd ldpd
-isisd nhrpd ospfd ospf6d pimd ripd ripngd
+isisd riftd nhrpd ospfd ospf6d pimd ripd ripngd
 
 Enable the service
 ^^^^^^^^^^^^^^^^^^

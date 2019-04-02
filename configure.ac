@@ -425,6 +425,8 @@ AC_ARG_ENABLE([watchfrr],
   AS_HELP_STRING([--disable-watchfrr], [do not build watchfrr]))
 AC_ARG_ENABLE([isisd],
   AS_HELP_STRING([--disable-isisd], [do not build isisd]))
+AC_ARG_ENABLE([riftd],
+  AS_HELP_STRING([--disable-riftd], [do not build riftd]))
 AC_ARG_ENABLE([pimd],
   AS_HELP_STRING([--disable-pimd], [do not build pimd]))
 AC_ARG_ENABLE([pbrd],
@@ -1299,6 +1301,48 @@ case "$host_os" in
 esac
 AC_DEFINE_UNQUOTED([ISIS_METHOD], [$ISIS_METHOD_MACRO], [selected method for isis, == one of the constants])
 
+dnl -------------------------
+dnl Determine RIFT I/O method
+dnl RIFT-TODO: Get rid of this once RIFT has been modified to use UDP sockets
+dnl -------------------------
+AC_DEFINE([RIFT_METHOD_PFPACKET], [1], [constant value for rift method pfpacket])
+AC_DEFINE([RIFT_METHOD_DLPI], [2], [constant value for rift method dlpi])
+AC_DEFINE([RIFT_METHOD_BPF], [3], [constant value for rift method bpf])
+AC_CHECK_HEADER([net/bpf.h])
+AC_CHECK_HEADER([sys/dlpi.h])
+AC_MSG_CHECKING([zebra IS-IS I/O method])
+
+case "$host_os" in
+  linux*)
+    AC_MSG_RESULT([pfpacket])
+    RIFT_METHOD_MACRO="RIFT_METHOD_PFPACKET"
+    ;;
+  solaris* | sunos*)
+    AC_MSG_RESULT([DLPI])
+    RIFT_METHOD_MACRO="RIFT_METHOD_DLPI"
+    ;;
+  *)
+    if test $ac_cv_header_net_bpf_h = no; then
+      if test $ac_cv_header_sys_dlpi_h = no; then
+        AC_MSG_RESULT([none])
+        if test "${enable_riftd}" = yes -o "${enable_fabricd}" = yes; then
+          AC_MSG_FAILURE([IS-IS support requested but no packet backend found])
+        fi
+        AC_MSG_WARN([*** IS-IS support will not be built ***])
+        enable_riftd="no"
+        enable_fabricd="no"
+      else
+        AC_MSG_RESULT([DLPI])
+      fi
+      RIFT_METHOD_MACRO="RIFT_METHOD_DLPI"
+    else
+      AC_MSG_RESULT([BPF])
+      RIFT_METHOD_MACRO="RIFT_METHOD_BPF"
+    fi
+    ;;
+esac
+AC_DEFINE_UNQUOTED([RIFT_METHOD], [$RIFT_METHOD_MACRO], [selected method for rift, == one of the constants])
+
 dnl ---------------------------------------------------------------
 dnl figure out how to specify an interface in multicast sockets API
 dnl ---------------------------------------------------------------
@@ -1515,6 +1559,7 @@ AM_CONDITIONAL([RIPNGD], [test "${enable_ripngd}" != "no"])
 AM_CONDITIONAL([BABELD], [test "${enable_babeld}" != "no"])
 AM_CONDITIONAL([OSPF6D], [test "${enable_ospf6d}" != "no"])
 AM_CONDITIONAL([ISISD], [test "${enable_isisd}" != "no"])
+AM_CONDITIONAL([RIFTD], [test "${enable_riftd}" != "no"])
 AM_CONDITIONAL([PIMD], [test "${enable_pimd}" != "no"])
 AM_CONDITIONAL([PBRD], [test "${enable_pbrd}" != "no"])
 AM_CONDITIONAL([SHARPD], [test "${enable_sharpd}" = "yes"])

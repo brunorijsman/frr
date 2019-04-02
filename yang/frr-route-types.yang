@@ -60,6 +60,9 @@ module frr-route-types {
       enum openfabric {
         value 26;
       }
+      enum rift {
+        value 27;
+      }
     }
   }
 
@@ -103,6 +106,9 @@ module frr-route-types {
       }
       enum openfabric {
         value 26;
+      }
+      enum rift {
+        value 27;
       }
     }
   }

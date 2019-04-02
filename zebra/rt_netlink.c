@@ -126,6 +126,9 @@ static inline int zebra2proto(int proto)
 	case ZEBRA_ROUTE_ISIS:
 		proto = RTPROT_ISIS;
 		break;
+	case ZEBRA_ROUTE_RIFT:
+		proto = RTPROT_RIFT;
+		break;
 	case ZEBRA_ROUTE_RIP:
 		proto = RTPROT_RIP;
 		break;
@@ -182,6 +185,9 @@ static inline int proto2zebra(int proto, int family)
 		break;
 	case RTPROT_ISIS:
 		proto = ZEBRA_ROUTE_ISIS;
+		break;
+	case RTPROT_RIFT:
+		proto = ZEBRA_ROUTE_RIFT;
 		break;
 	case RTPROT_RIP:
 		proto = ZEBRA_ROUTE_RIP;

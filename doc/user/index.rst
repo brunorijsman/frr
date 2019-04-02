@@ -46,6 +46,7 @@ Protocols
    ldpd
    eigrpd
    isisd
+   riftd
    nhrpd
    ospfd
    ospf6d

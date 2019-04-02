@@ -176,6 +176,10 @@ static inline int qpb__protocol__set(Qpb__Protocol *pb_proto, int route_type)
 		*pb_proto = QPB__PROTOCOL__ISIS;
 		break;
 
+	case ZEBRA_ROUTE_RIFT:
+		*pb_proto = QPB__PROTOCOL__RIFT;
+		break;
+
 	case ZEBRA_ROUTE_BGP:
 		*pb_proto = QPB__PROTOCOL__BGP;
 		break;

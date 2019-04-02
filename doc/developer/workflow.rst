@@ -680,6 +680,7 @@ GNU coding style apply to the following parts:
 -  ``ospfd/``
 -  ``ospf6d/``
 -  ``isisd/``
+-  ``riftd/``
 -  ``ripd/``
 -  ``ripngd/``
 -  ``vtysh/``

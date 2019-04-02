@@ -53,6 +53,7 @@ typedef enum {
 	RMAP_BGP,
 	RMAP_ZEBRA,
 	RMAP_ISIS,
+	RMAP_RIFT
 } route_map_object_t;
 
 typedef enum { RMAP_EXIT, RMAP_GOTO, RMAP_NEXT } route_map_end_t;

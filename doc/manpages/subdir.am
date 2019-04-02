@@ -13,6 +13,7 @@ man_RSTFILES = \
 	doc/manpages/frr.rst \
 	doc/manpages/index.rst \
 	doc/manpages/isisd.rst \
+	doc/manpages/riftd.rst \
 	doc/manpages/ldpd.rst \
 	doc/manpages/mtracebis.rst \
 	doc/manpages/nhrpd.rst \
