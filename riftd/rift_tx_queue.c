@@ -1,6 +1,10 @@
 /*
  * RIFT Rout(e)ing protocol - LSP TX Queuing logic
  *
+ * Copyright (C) 2019 Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2018 Christian Franke
  *
  * This file is part of FreeRangeRouting (FRR)

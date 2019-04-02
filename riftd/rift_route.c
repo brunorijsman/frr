@@ -1,5 +1,10 @@
 /*
  * RIFT Rout(e)ing protocol               - rift_route.c
+ *
+ * Copyright (C) 2019        Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2001,2002   Sampo Saaristo
  *                           Tampere University of Technology
  *                           Institute of Communications Engineering

@@ -1,6 +1,10 @@
 /*
  * RIFT Rout(e)ing protocol - rift_redist.h
  *
+ * Copyright (C) 2019 Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2013-2015 Christian Franke <chris@opensourcerouting.org>
  *
  * This program is free software; you can redistribute it and/or modify it

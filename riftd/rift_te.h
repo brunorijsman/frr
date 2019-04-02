@@ -3,6 +3,10 @@
  *
  * This is an implementation of RFC5305, RFC 5307 and RFC 7810
  *
+ * Copyright (C) 2019 Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  *      Copyright (C) 2014 Orange Labs
  *      http://www.orange.com
  *

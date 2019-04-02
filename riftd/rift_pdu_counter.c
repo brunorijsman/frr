@@ -1,5 +1,10 @@
 /*
  * RIFT Routing protocol - rift_pdu_counter.c
+ *
+ * Copyright (C) 2019        Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2018 Christian Franke, for NetDEF Inc.
  *
  * This program is free software; you can redistribute it and/or modify it

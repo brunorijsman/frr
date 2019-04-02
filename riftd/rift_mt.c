@@ -1,6 +1,10 @@
 /*
  * RIFT Rout(e)ing protocol - Multi Topology Support
  *
+ * Copyright (C) 2019        Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2017 Christian Franke
  *
  * This file is part of FreeRangeRouting (FRR)

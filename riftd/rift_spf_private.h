@@ -1,6 +1,10 @@
 /*
  * RIFT Rout(e)ing protocol                  - rift_spf_private.h
  *
+ * Copyright (C) 2019        Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2001,2002   Sampo Saaristo
  *                           Tampere University of Technology
  *                           Institute of Communications Engineering

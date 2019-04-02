@@ -1,5 +1,10 @@
 /*
  * RIFT-specific error messages.
+ *
+ * Copyright (C) 2019 Bruno Rijsman
+ *
+ * This code is based on the original FRR IS-IS code, which is:
+ * 
  * Copyright (C) 2018 Cumulus Networks, Inc.
  *               Donald Sharp
  *
